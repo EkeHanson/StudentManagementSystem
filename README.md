@@ -61,36 +61,83 @@ A comprehensive **React-based web application** designed to streamline administr
 
 ## 📁 Project Structure  
 
-```plaintext  
-src/  
-├── components/  
-│   ├── Auth/              # Authentication components  
-│   ├── Dashboard/         # Dashboard components for all roles  
-│   ├── Forms/             # Reusable form components  
-│   ├── Tables/            # Reusable table components  
-│   ├── Notifications/     # Notification components  
-│   ├── Charts/            # Analytics and chart components  
-│   ├── Shared/            # Common UI components (Navbar, Sidebar, etc.)  
-├── pages/  
-│   ├── Auth/              # Login and registration pages  
-│   ├── Dashboard/         # Role-specific dashboard pages  
-│   ├── UserManagement/    # Manage users and profiles  
-│   ├── StudentManagement/ # Manage students and their records  
-│   ├── TeacherManagement/ # Manage teachers and assignments  
-│   ├── ParentPortal/      # Pages for parent interactions  
-│   ├── AcademicManagement/# Timetable, exams, and homework pages  
-│   ├── AttendanceManagement/# Attendance tracking pages  
-│   ├── FeeManagement/     # Fee structure and payments  
-│   ├── LibraryManagement/ # Library catalog and tracking  
-│   ├── TransportManagement/# Bus routes and tracking pages  
-│   ├── LaboratoryManagement/# Lab inventory and scheduling  
-│   ├── Reports/           # Analytics and report generation pages  
-├── context/               # Global state management (Context API)  
-├── services/              # API calls and backend integration  
-├── utils/                 # Utility functions and constants  
-├── styles/                # Global and theme styles  
-├── App.jsx                # Main app entry point  
-├── index.jsx              # React DOM entry point  
+```plaintext  src/
+├── assets/                  # Static assets (images, fonts, etc.)
+│
+├── components/              # Reusable UI components
+│   ├── auth/                # Authentication components
+│   │   ├── LoginForm.jsx
+│   │   ├── RegisterForm.jsx
+│   │   ├── ForgotPasswordForm.jsx
+│   │   └── ResetPasswordForm.jsx
+│   │
+│   ├── dashboard/           # Dashboard components
+│   │   ├── AdminStats.jsx
+│   │   ├── DashboardLayout.jsx
+│   │   ├── TeacherClasses.jsx
+│   │   ├── StudentOverview.jsx
+│   │   └── ParentView.jsx
+│   │
+│   ├── shared/             # Shared UI components
+│   │   ├── Navbar.jsx
+│   │   ├── Sidebar.jsx
+│   │   ├── ProtectedRoute.jsx
+│   │   ├── LoadingSpinner.jsx
+│   │   └── ErrorMessage.jsx
+│   │
+│   └── user/               # User management components
+│       ├── ProfileForm.jsx
+│       └── AvatarUploader.jsx
+│
+├── context/                # Context providers
+│   ├── AuthContext.jsx
+│   └── AppContext.jsx
+│
+├── hooks/                  # Custom hooks
+│   ├── useAuth.js
+│   └── useApi.js
+│
+├── pages/                  # Page components
+│   ├── auth/               # Authentication pages
+│   │   ├── Login.jsx
+│   │   ├── Register.jsx
+│   │   ├── ForgotPassword.jsx
+│   │   └── ResetPassword.jsx
+│   │
+│   ├── dashboard/          # Role-specific dashboards
+│   │   ├── AdminDashboard.jsx
+│   │   ├── TeacherDashboard.jsx
+│   │   ├── StudentDashboard.jsx
+│   │   └── ParentDashboard.jsx
+│   │
+│   ├── user/              # User management pages
+│   │   ├── Profile.jsx
+│   │   └── Settings.jsx
+│   │
+│   ├── errors/            # Error pages
+│   │   ├── NotFound.jsx
+│   │   └── Unauthorized.jsx
+│   │
+│   └── Home.jsx           # Landing page
+│
+├── services/              # API services
+│   ├── auth.service.js
+│   ├── user.service.js
+│   ├── student.service.js
+│   ├── teacher.service.js
+│   └── api.js             # Axios instance
+│
+├── utils/                 # Utility functions
+│   ├── constants.js       # App constants
+│   ├── helpers.js         # Helper functions
+│   └── validators.js      # Validation functions
+│
+├── styles/                # Global styles
+│   ├── globals.css        # Global CSS
+│   └── tailwind.css       # Tailwind imports
+│
+├── App.jsx                # Main app component
+└── main.jsx               # App entry point  
 ```  
 
 ---
