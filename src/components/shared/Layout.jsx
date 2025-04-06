@@ -89,7 +89,7 @@ const Layout = () => {
             ))}
           </List>
           
-          {currentUser?.role === 'admin' && (
+          {/* {currentUser?.role === 'admin' && ( */}
             <>
               <Divider />
               <List>
@@ -108,7 +108,7 @@ const Layout = () => {
                 ))}
               </List>
             </>
-          )}
+          {/* )} */}
         </Box>
       </Drawer>
       

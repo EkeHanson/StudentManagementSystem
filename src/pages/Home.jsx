@@ -77,7 +77,8 @@ const Home = () => {
   // Quick actions visible to everyone
   const quickActions = [
     { label: "View Library", path: "/library" },
-    { label: "Check Calendar", path: "/calendar" },
+    { label: "Check Student", path: "/students" },
+    { label: "Check Teacher", path: "/dashboard/teacher" },
     { label: "See Transport", path: "/transport" },
     { label: "Explore Labs", path: "/labs" }
   ];
