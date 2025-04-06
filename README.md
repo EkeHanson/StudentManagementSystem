@@ -61,7 +61,9 @@ A comprehensive **React-based web application** designed to streamline administr
 
 ## 📁 Project Structure  
 
-```plaintext  src/
+```plaintext  
+
+src/
 ├── assets/                  # Static assets (images, fonts, etc.)
 │
 ├── components/              # Reusable UI components
@@ -78,6 +80,16 @@ A comprehensive **React-based web application** designed to streamline administr
 │   │   ├── StudentOverview.jsx
 │   │   └── ParentView.jsx
 │   │
+│   ├── library/             # Library components
+│   │   ├── BookCatalog.jsx
+│   │   ├── BookSearch.jsx
+│   │   ├── BookDetailsModal.jsx
+│   │   ├── IssueReturnForm.jsx
+│   │   ├── DigitalLibrary.jsx
+│   │   ├── EBookReader.jsx
+│   │   ├── ResourceUpload.jsx
+│   │   └── LibraryStats.jsx
+│   │
 │   ├── shared/             # Shared UI components
 │   │   ├── Navbar.jsx
 │   │   ├── Sidebar.jsx
@@ -91,7 +103,8 @@ A comprehensive **React-based web application** designed to streamline administr
 │
 ├── context/                # Context providers
 │   ├── AuthContext.jsx
-│   └── AppContext.jsx
+│   ├── AppContext.jsx
+│   └── LibraryContext.jsx
 │
 ├── hooks/                  # Custom hooks
 │   ├── useAuth.js
@@ -110,6 +123,12 @@ A comprehensive **React-based web application** designed to streamline administr
 │   │   ├── StudentDashboard.jsx
 │   │   └── ParentDashboard.jsx
 │   │
+│   ├── library/            # Library pages
+│   │   ├── LibraryDashboard.jsx
+│   │   ├── PhysicalBooks.jsx
+│   │   ├── DigitalResources.jsx
+│   │   └── Circulation.jsx
+│   │
 │   ├── user/              # User management pages
 │   │   ├── Profile.jsx
 │   │   └── Settings.jsx
@@ -125,6 +144,7 @@ A comprehensive **React-based web application** designed to streamline administr
 │   ├── user.service.js
 │   ├── student.service.js
 │   ├── teacher.service.js
+│   ├── library.service.js
 │   └── api.js             # Axios instance
 │
 ├── utils/                 # Utility functions
@@ -137,7 +157,8 @@ A comprehensive **React-based web application** designed to streamline administr
 │   └── tailwind.css       # Tailwind imports
 │
 ├── App.jsx                # Main app component
-└── main.jsx               # App entry point  
+└── main.jsx               # App entry point
+
 ```  
 
 ---
