@@ -77,7 +77,8 @@ function App() {
                   <Route path="/dashboard/parent" element={<ParentDashboard />} />
                 </Route>
 
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                {/* <Route path="/" element={<Navigate to="/dashboard" replace />} /> */}
+                <Route path="/" element={<Navigate to="/" replace />} />
               </Route>
             </Routes>
           </LibraryProvider>
