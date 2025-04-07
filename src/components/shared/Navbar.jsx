@@ -33,7 +33,7 @@ const Navbar = () => {
             letterSpacing: 1 
           }}
         >
-          EduManage
+          appBrew
         </Typography>
       </Box>
 

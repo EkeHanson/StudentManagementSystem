@@ -21,7 +21,8 @@ const Pricing = () => {
       features: ["Up to 100 students", "Basic scheduling", "Standard reports", "Email support"],
       cta: "Start Learning",
       icon: <StarIcon color="primary" fontSize="large" />,
-      popular: false
+      popular: false,
+      color: 'primary'
     },
     { 
       title: "Professional", 
@@ -30,7 +31,8 @@ const Pricing = () => {
       features: ["Up to 500 students", "Advanced analytics", "Financial tracking", "Priority support", "API access"],
       cta: "Get Professional",
       icon: <BoltIcon color="warning" fontSize="large" />,
-      popular: true
+      popular: true,
+      color: 'warning'
     },
     { 
       title: "Enterprise", 
@@ -39,7 +41,8 @@ const Pricing = () => {
       features: ["Unlimited students", "Custom integrations", "Dedicated account manager", "24/7 support", "White-label options"],
       cta: "Contact Sales",
       icon: <DiamondIcon color="secondary" fontSize="large" />,
-      popular: false
+      popular: false,
+      color: 'secondary'
     }
   ];
 
@@ -125,13 +128,16 @@ const Pricing = () => {
                   transition: 'transform 0.3s ease',
                   '&:hover': {
                     transform: plan.popular ? 'scale(1.05)' : 'scale(1.03)'
-                  }
+                  },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  height: '100%'
                 }}
               >
                 {plan.popular && (
                   <Box sx={{
                     position: 'absolute',
-                    top: -12,
+                    top: 1,
                     right: 20,
                     backgroundColor: theme.palette.warning.main,
                     color: theme.palette.warning.contrastText,
@@ -150,7 +156,7 @@ const Pricing = () => {
                   p: 4,
                   display: 'flex',
                   flexDirection: 'column',
-                  height: '100%'
+                  flexGrow: 1
                 }}>
                   <Box sx={{ 
                     textAlign: 'center',
@@ -194,22 +200,40 @@ const Pricing = () => {
                     ))}
                   </Stack>
                   
-                  <Button 
-                    variant={plan.popular ? 'contained' : 'outlined'} 
-                    color={plan.popular ? 'warning' : 'primary'}
-                    size="large"
-                    fullWidth
-                    sx={{ 
-                      py: 2,
-                      borderRadius: 2,
-                      fontWeight: 700,
-                      fontSize: '1rem',
-                      mt: 'auto'
-                    }} 
-                    onClick={() => navigate(plan.title === 'Enterprise' ? '/contact' : '/signup')}
-                  >
-                    {plan.cta}
-                  </Button>
+                  <Box sx={{ 
+                    mt: 'auto',
+                    pt: 2,
+                    position: 'relative',
+                    '&::before': {
+                      content: '""',
+                      position: 'absolute',
+                      top: 0,
+                      left: -32,
+                      right: -32,
+                      height: '1px',
+                      backgroundColor: theme.palette.divider
+                    }
+                  }}>
+                    <Button 
+                      variant={plan.popular ? 'contained' : 'outlined'} 
+                      color={plan.color}
+                      size="large"
+                      fullWidth
+                      sx={{ 
+                        py: 2,
+                        borderRadius: 2,
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        boxShadow: plan.popular ? theme.shadows[4] : 'none',
+                        '&:hover': {
+                          boxShadow: plan.popular ? theme.shadows[6] : theme.shadows[2]
+                        }
+                      }} 
+                      onClick={() => navigate(plan.title === 'Enterprise' ? '/contact' : '/signup')}
+                    >
+                      {plan.cta}
+                    </Button>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
@@ -238,7 +262,11 @@ const Pricing = () => {
               px: 4,
               py: 1.5,
               borderRadius: 2,
-              fontWeight: 600
+              fontWeight: 600,
+              boxShadow: theme.shadows[4],
+              '&:hover': {
+                boxShadow: theme.shadows[6]
+              }
             }} 
             onClick={() => navigate('/contact')}
           >

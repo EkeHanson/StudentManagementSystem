@@ -1,6 +1,19 @@
 import React from 'react';
-import { Box, Container, Typography, Grid, Button, useTheme } from '@mui/material';
-import { People as PeopleIcon, Class as ClassIcon, Assessment as ReportsIcon, AccountBalance as FeesIcon, ArrowForward } from '@mui/icons-material';
+import { Box, Container, Typography, Grid, Button, useTheme, Chip, Divider } from '@mui/material';
+import {
+  People as PeopleIcon,
+  Class as ClassIcon,
+  Assessment as ReportsIcon,
+  AccountBalance as FeesIcon,
+  LibraryBooks as LibraryIcon,
+  DirectionsBus as TransportIcon,
+  Science as LabIcon,
+  Event as EventIcon,
+  Security as AuthIcon,
+  School as TeacherIcon,
+  FamilyRestroom as ParentIcon,
+  ArrowForward
+} from '@mui/icons-material';
 import Navbar from '../components/shared/Navbar';
 import Footer from '../components/shared/Footer';
 import { Parallax } from 'react-parallax';
@@ -8,32 +21,94 @@ import { Parallax } from 'react-parallax';
 const Features = () => {
   const theme = useTheme();
   
-  const features = [
-    { 
-      icon: <PeopleIcon fontSize="large" />, 
-      title: "Student Management", 
-      description: "Track student progress, attendance, and records seamlessly.",
-      image: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
+  const featureCategories = [
+    {
+      title: "Core Management",
+      icon: <PeopleIcon fontSize="large" />,
+      features: [
+        {
+          title: "Student Management",
+          description: "Register and manage detailed student profiles with class assignments, ID generation, and disciplinary records.",
+          image: "https://images.unsplash.com/photo-1588072432836-e10032774350?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80"
+        },
+        {
+          title: "Teacher Management",
+          description: "Manage teacher profiles, class assignments, and attendance tracking.",
+          image: "https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        },
+        {
+          title: "Parent Portal",
+          description: "Academic performance overview, fee payments, and messaging system for parents.",
+          image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1374&q=80"
+        }
+      ]
     },
-    { 
-      icon: <ClassIcon fontSize="large" />, 
-      title: "Class Scheduling", 
-      description: "Organize classes, timetables, and teacher assignments.",
-      image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    {
+      title: "Academic Systems",
+      icon: <ClassIcon fontSize="large" />,
+      features: [
+        {
+          title: "Academic Management",
+          description: "Timetable creation, examination scheduling, grading system, and assignment tracking.",
+          image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        },
+        {
+          title: "Attendance Tracking",
+          description: "Comprehensive student and teacher attendance with absence notifications.",
+          image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        },
+        {
+          title: "Library Management",
+          description: "Catalog system, book issue/return, digital library with eBook resources.",
+          image: "https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=1476&q=80"
+        }
+      ]
     },
-    { 
-      icon: <ReportsIcon fontSize="large" />, 
-      title: "Analytics & Reports", 
-      description: "Generate detailed insights with customizable reports.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    {
+      title: "Administrative Tools",
+      icon: <FeesIcon fontSize="large" />,
+      features: [
+        {
+          title: "Fee Management",
+          description: "Fee structure creation, online payments, receipts, and tracking system.",
+          image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        },
+        {
+          title: "Transport System",
+          description: "Bus route management, schedule tracking, and optional GPS integration.",
+          image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1472&q=80"
+        },
+        {
+          title: "Laboratory Management",
+          description: "Lab inventory, scheduling, experiment assignments, and evaluations.",
+          image: "https://images.unsplash.com/photo-1563191911-e65f8655ebf9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        }
+      ]
     },
-    { 
-      icon: <FeesIcon fontSize="large" />, 
-      title: "Financial Tools", 
-      description: "Simplify fee collection and financial tracking.",
-      image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    {
+      title: "Additional Features",
+      icon: <ReportsIcon fontSize="large" />,
+      features: [
+        {
+          title: "Event Management",
+          description: "School calendar and event participation tracking system.",
+          image: "https://images.unsplash.com/photo-1541178735493-479c1a27ed24?ixlib=rb-4.0.3&auto=format&fit=crop&w=1471&q=80"
+        },
+        {
+          title: "Analytics & Reports",
+          description: "Comprehensive reports for attendance, fees, and academic performance.",
+          image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+        },
+        {
+          title: "User Authentication",
+          description: "Role-based access control with secure login and multi-factor auth.",
+          image: "https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1469&q=80"
+        }
+      ]
     }
   ];
+
+  const allFeatures = featureCategories.flatMap(category => category.features);
 
   return (
     <Box sx={{ 
@@ -42,21 +117,20 @@ const Features = () => {
       display: 'flex',
       flexDirection: 'column'
     }}>
-      {/* Modern Navbar with Glass Morphism */}
+      {/* Modern Navbar */}
       <Navbar />
       
-      {/* Hero Section with Parallax Effect */}
+      {/* Hero Section */}
       <Parallax 
-        bgImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+        bgImage="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80" 
         strength={500}
-        style={{ marginBottom: '4rem' }}
       >
         <Box sx={{ 
           height: '60vh',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'rgba(0,0,0,0.5)',
+          backgroundColor: 'rgba(0,0,0,0.6)',
           backdropFilter: 'blur(2px)'
         }}>
           <Container maxWidth="lg">
@@ -71,7 +145,7 @@ const Features = () => {
                 textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
               }}
             >
-              Transform Your Institution
+              appBrew TechHub Management School
             </Typography>
             <Typography 
               variant="h5" 
@@ -83,7 +157,7 @@ const Features = () => {
                 textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
               }}
             >
-              Powerful tools designed for modern educational institutions
+              Comprehensive school management solution for the modern educational institution
             </Typography>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
               <Button 
@@ -98,7 +172,7 @@ const Features = () => {
                   boxShadow: theme.shadows[4]
                 }}
               >
-                Get Started
+                Request Demo
               </Button>
               <Button 
                 variant="outlined" 
@@ -116,55 +190,84 @@ const Features = () => {
                   }
                 }}
               >
-                Learn More
+                Explore Features
               </Button>
             </Box>
           </Container>
         </Box>
       </Parallax>
 
-      {/* Features Section */}
-      <Container maxWidth="xl" sx={{ mb: 10 }}>
+      {/* Features Overview */}
+      <Container maxWidth="xl" sx={{ my: 10 }}>
         <Typography 
           variant="h3" 
           align="center" 
           sx={{ 
             fontWeight: 700, 
-            mb: { xs: 4, md: 6 },
+            mb: 2,
             fontSize: { xs: '2rem', md: '3rem' },
             color: theme.palette.text.primary
           }}
         >
-          Powerful Features for <Box component="span" sx={{ color: theme.palette.primary.main }}>Modern Education</Box>
+          Complete School <Box component="span" sx={{ color: theme.palette.primary.main }}>Management Solution</Box>
         </Typography>
         
-        <Grid 
-          container 
-          spacing={{ xs: 4, md: 8 }}
-          justifyContent="center"
+        <Typography 
+          variant="h6" 
+          align="center" 
+          sx={{ 
+            fontWeight: 400, 
+            mb: 6,
+            color: theme.palette.text.secondary,
+            maxWidth: 800,
+            mx: 'auto'
+          }}
         >
-          {features.map((feature, index) => (
-            <Grid 
-              item 
-              xs={12} 
-              sm={6} 
-              lg={3} 
+          Our platform integrates all aspects of school administration into one seamless system, saving time and improving communication across your institution.
+        </Typography>
+
+        {/* Category Tabs */}
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          // flexWrap: 'wrap',
+          gap: 2,
+          mb: 6
+        }}>
+          {featureCategories.map((category, index) => (
+            <Chip
               key={index}
-              sx={{ 
-                display: 'flex',
-                justifyContent: 'center'
+              icon={React.cloneElement(category.icon, { sx: { color: theme.palette.primary.main } })}
+              label={category.title}
+              clickable
+              sx={{
+                px: 3,
+                py: 2,
+                fontSize: '1rem',
+                fontWeight: 600,
+                borderRadius: '8px',
+                border: `1px solid ${theme.palette.divider}`,
+                '&:hover': {
+                  backgroundColor: theme.palette.action.hover
+                }
               }}
-            >
+            />
+          ))}
+        </Box>
+
+        {/* All Features Grid */}
+        <Grid container spacing={4}>
+          {allFeatures.map((feature, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
               <Box sx={{
-                width: '100%',
-                maxWidth: 350,
+                height: '100%',
                 borderRadius: 4,
                 overflow: 'hidden',
-                boxShadow: theme.shadows[4],
+                boxShadow: theme.shadows[2],
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
                 '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: theme.shadows[8]
+                  transform: 'translateY(-5px)',
+                  boxShadow: theme.shadows[6]
                 }
               }}>
                 <Box sx={{
@@ -188,34 +291,16 @@ const Features = () => {
                   p: 4,
                   backgroundColor: theme.palette.background.paper
                 }}>
-                  <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    mb: 3
-                  }}>
-                    <Box sx={{
-                      width: 60,
-                      height: 60,
-                      borderRadius: '50%',
-                      backgroundColor: theme.palette.primary.light,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      mr: 3,
-                      color: theme.palette.primary.main
-                    }}>
-                      {feature.icon}
-                    </Box>
-                    <Typography 
-                      variant="h5" 
-                      sx={{ 
-                        fontWeight: 700,
-                        color: theme.palette.text.primary
-                      }}
-                    >
-                      {feature.title}
-                    </Typography>
-                  </Box>
+                  <Typography 
+                    variant="h5" 
+                    sx={{ 
+                      fontWeight: 700,
+                      mb: 2,
+                      color: theme.palette.text.primary
+                    }}
+                  >
+                    {feature.title}
+                  </Typography>
                   
                   <Typography 
                     variant="body1" 
@@ -247,12 +332,124 @@ const Features = () => {
         </Grid>
       </Container>
 
+      {/* Feature Highlights Section */}
+      <Box sx={{ 
+        py: 10,
+        backgroundColor: theme.palette.grey[100]
+      }}>
+        <Container maxWidth="lg">
+          <Typography 
+            variant="h4" 
+            sx={{ 
+              fontWeight: 700, 
+              mb: 6,
+              textAlign: 'center'
+            }}
+          >
+            Key System Capabilities
+          </Typography>
+          
+          <Grid container spacing={6}>
+            <Grid item xs={12} md={6}>
+              <Box sx={{ 
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 4,
+                p: 4,
+                height: '100%',
+                boxShadow: theme.shadows[1]
+              }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
+                  <Box component="span" sx={{ color: theme.palette.primary.main, mr: 1 }}>✓</Box>
+                  Role-Based Access Control
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  Secure, granular permissions for administrators, teachers, students, and parents with:
+                </Typography>
+                <Box component="ul" sx={{ pl: 3, mb: 3 }}>
+                  <li><Typography variant="body1">Customizable permission sets</Typography></li>
+                  <li><Typography variant="body1">Multi-factor authentication</Typography></li>
+                  <li><Typography variant="body1">Password recovery system</Typography></li>
+                </Box>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} md={6}>
+              <Box sx={{ 
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 4,
+                p: 4,
+                height: '100%',
+                boxShadow: theme.shadows[1]
+              }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
+                  <Box component="span" sx={{ color: theme.palette.primary.main, mr: 1 }}>✓</Box>
+                  Comprehensive Reporting
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  Generate detailed analytics and reports for all aspects of school operations:
+                </Typography>
+                <Box component="ul" sx={{ pl: 3, mb: 3 }}>
+                  <li><Typography variant="body1">Student performance analytics</Typography></li>
+                  <li><Typography variant="body1">Financial and fee collection reports</Typography></li>
+                  <li><Typography variant="body1">Custom report builder</Typography></li>
+                </Box>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} md={6}>
+              <Box sx={{ 
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 4,
+                p: 4,
+                height: '100%',
+                boxShadow: theme.shadows[1]
+              }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
+                  <Box component="span" sx={{ color: theme.palette.primary.main, mr: 1 }}>✓</Box>
+                  Integrated Communication
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  Seamless communication channels between all stakeholders:
+                </Typography>
+                <Box component="ul" sx={{ pl: 3, mb: 3 }}>
+                  <li><Typography variant="body1">Parent-teacher messaging</Typography></li>
+                  <li><Typography variant="body1">School-wide announcements</Typography></li>
+                  <li><Typography variant="body1">Notification system</Typography></li>
+                </Box>
+              </Box>
+            </Grid>
+            
+            <Grid item xs={12} md={6}>
+              <Box sx={{ 
+                backgroundColor: theme.palette.background.paper,
+                borderRadius: 4,
+                p: 4,
+                height: '100%',
+                boxShadow: theme.shadows[1]
+              }}>
+                <Typography variant="h5" sx={{ fontWeight: 600, mb: 3 }}>
+                  <Box component="span" sx={{ color: theme.palette.primary.main, mr: 1 }}>✓</Box>
+                  Mobile Responsive Design
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 2 }}>
+                  Fully responsive interface works perfectly on all devices:
+                </Typography>
+                <Box component="ul" sx={{ pl: 3, mb: 3 }}>
+                  <li><Typography variant="body1">Optimized for phones and tablets</Typography></li>
+                  <li><Typography variant="body1">Teacher classroom apps</Typography></li>
+                  <li><Typography variant="body1">Parent mobile access</Typography></li>
+                </Box>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
       {/* CTA Section */}
       <Box sx={{
         py: 10,
         backgroundColor: theme.palette.primary.main,
-        color: 'white',
-        mb: -2
+        color: 'white'
       }}>
         <Container maxWidth="lg" sx={{ textAlign: 'center' }}>
           <Typography 
@@ -263,7 +460,7 @@ const Features = () => {
               fontSize: { xs: '2rem', md: '3rem' }
             }}
           >
-            Ready to transform your institution?
+            Ready to transform your school's administration?
           </Typography>
           <Typography 
             variant="h6" 
@@ -273,30 +470,51 @@ const Features = () => {
               opacity: 0.9
             }}
           >
-            Join thousands of educational institutions using our platform
+            Join hundreds of educational institutions using our comprehensive platform
           </Typography>
-          <Button 
-            variant="contained" 
-            size="large" 
-            endIcon={<ArrowForward />}
-            sx={{
-              borderRadius: '50px',
-              px: 6,
-              py: 1.5,
-              fontWeight: 600,
-              backgroundColor: 'white',
-              color: theme.palette.primary.main,
-              '&:hover': {
-                backgroundColor: 'rgba(255,255,255,0.9)'
-              }
-            }}
-          >
-            Get Started Today
-          </Button>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 3 }}>
+            <Button 
+              variant="contained" 
+              size="large" 
+              endIcon={<ArrowForward />}
+              sx={{
+                borderRadius: '50px',
+                px: 6,
+                py: 1.5,
+                fontWeight: 600,
+                backgroundColor: 'white',
+                color: theme.palette.primary.main,
+                '&:hover': {
+                  backgroundColor: 'rgba(255,255,255,0.9)'
+                }
+              }}
+            >
+              Schedule Demo
+            </Button>
+            <Button 
+              variant="outlined" 
+              size="large"
+              sx={{
+                borderRadius: '50px',
+                px: 6,
+                py: 1.5,
+                fontWeight: 600,
+                borderWidth: '2px',
+                color: 'white',
+                borderColor: 'white',
+                '&:hover': {
+                  borderWidth: '2px',
+                  backgroundColor: 'rgba(255,255,255,0.1)'
+                }
+              }}
+            >
+              Contact Sales
+            </Button>
+          </Box>
         </Container>
       </Box>
 
-      {/* Modern Footer */}
+      {/* Footer */}
       <Footer />
     </Box>
   );
