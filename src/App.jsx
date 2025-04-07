@@ -7,6 +7,12 @@ import ProtectedRoute from './components/shared/ProtectedRoute';
 import Layout from './components/shared/Layout';
 import Login from './pages/auth/Login';
 import Home from './pages/Home';
+import Features from './pages/Features';
+import About from './pages/About';
+import Pricing from './pages/Pricing';
+import GetDemo from './pages/GetDemo';
+import ContactUs from './pages/ContactUs';
+
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
@@ -34,6 +40,11 @@ function App() {
           <LibraryProvider>
             <Routes>
               <Route path="/login" element={<Login />} />
+              <Route path="/demo" element={<GetDemo />} />  
+              <Route path="/contact" element={<ContactUs />} />  
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/about" element={<About />} />
+              <Route path="Features" element={<Features />} />
               <Route path="/register" element={<Register />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
