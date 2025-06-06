@@ -16,7 +16,7 @@ import ContactUs from './pages/ContactUs';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 import ResetPassword from './pages/auth/ResetPassword';
-import AdminDashboard from './pages/dashboard/AdminDashboard';
+import AdminDashboard from './pages/dashboard/AdminDashboard/AdminDashboard';
 import TeacherDashboard from './pages/dashboard/TeacherDashboard';
 import StudentDashboard from './pages/dashboard/StudentDashboard';
 import ParentDashboard from './pages/dashboard/ParentDashboard';

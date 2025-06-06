@@ -1,0 +1,576 @@
+.fee-tab {
+  min-height: 100%;
+  background: linear-gradient(135deg, #e0f2fe, #f3e8ff);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
+}
+
+.fee-tab h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+}
+
+/* Countdown Banner */
+.countdown-banner {
+  background: linear-gradient(to right, #f87171, #ef4444);
+  color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  animation: slideIn 0.3s ease-in;
+}
+
+.countdown-banner button {
+  background: #b91c1c;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.countdown-banner button:hover {
+  background: #991b1b;
+}
+
+/* Summary Section */
+.summary-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.metric-card {
+  padding: 16px;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+}
+
+.metric-card span {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.metric-card p {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+.metric-card.expected {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+.metric-card.collected {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+.metric-card.outstanding {
+  background: linear-gradient(to right, #f87171, #ef4444);
+}
+
+.metric-card.collection-rate {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+}
+
+.metric-card.late-payments {
+  background: linear-gradient(to right, #8b5cf6, #7c3aed);
+}
+
+.metric-card.refunds {
+  background: linear-gradient(to right, #06b6d4, #0891b2);
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.insight-card {
+  background: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.insight-card h3 {
+  font-size: 18px;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.insight-card ul {
+  list-style: disc;
+  padding-left: 20px;
+  color: #4b5563;
+}
+
+@media (max-width: 768px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Chart Section */
+.chart-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.chart-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Controls Section */
+.controls-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filters-grid input,
+.filters-grid select {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1f2937;
+  background: #f9fafb;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filters-grid input:focus,
+.filters-grid select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.filters-grid button {
+  background: linear-gradient(to right, #8b5cf6, #7c3aed);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.filters-grid button:hover {
+  background: linear-gradient(to right, #7c3aed, #6d28d9);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 16px;
+}
+
+.action-buttons button {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.action-buttons button:first-child {
+  background: linear-gradient(to right, #10b981, #059669);
+}
+
+.action-buttons button:first-child:hover {
+  background: linear-gradient(to right, #059669, #047857);
+}
+
+.action-buttons button:last-child {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+}
+
+.action-buttons button:last-child:hover {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+}
+
+.action-buttons button svg {
+  margin-right: 8px;
+}
+
+/* Table Section */
+.table-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.fee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fee-table th,
+.fee-table td {
+  padding: 16px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fee-table th {
+  background: linear-gradient(to bottom, #e0e7ff, #dbe0ff);
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+.fee-table tr:hover {
+  background: #f9fafb;
+}
+
+.fee-table .status-chip {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100px;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.fee-table .status-chip.paid {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.fee-table .status-chip.partially-paid {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.fee-table .status-chip.unpaid {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.fee-table .action-button {
+  padding: 8px;
+  border: none;
+  border-radius: 50%;
+  cursor: #fff;
+  transition: background 0.2s;
+}
+
+.fee-table .action-button.edit {
+  background: #3b82f6;
+}
+
+.fee-table .action-button.edit:hover {
+  background: #2563ef;
+}
+
+.fee-table .action-button.delete {
+  background: #ef4444;
+}
+
+.fee-table .action-button.delete:hover {
+  background: #dc2626;
+}
+
+.fee-table .no-data {
+  text-align: center;
+  color: #6b7280;
+  padding: 24px;
+}
+
+/* Pagination Section */
+.pagination-section {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.pagination-section button {
+  padding: 8px 16px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #1f2937;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.pagination-section button:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.pagination-section button.active {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.pagination-section button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Calendar Section */
+.calendar-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 24px;
+}
+
+.calendar-section ul {
+  list-style: disc;
+  padding-left: 24px;
+  color: #4b5563;
+}
+
+.calendar-section li {
+  margin-bottom: 8px;
+}
+
+/* Audit Section */
+.audit-section {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.audit-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.audit-table th,
+.audit-table td {
+  padding: 16px;
+  font-size: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.audit-table th {
+  background: linear-gradient(to bottom, #e0e7ff, #dbe0ff);
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+.audit-table tr:hover {
+  background: #f9fafb;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.open {
+  display: flex;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.3s ease;
+}
+
+.modal-content h2 {
+  font-size: 20px;
+}
+
+.modal-content p {
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.form-grid input,
+.form-grid select {
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1f2937;
+  background: #f9fafb;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-grid input:focus,
+.form-grid select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-grid .error-message {
+  grid-column: 1 / -1;
+  color: #ef4444;
+  font-size: 14px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.modal-actions button {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-actions button:first-child {
+  background: #e5e7eb;
+  color: #1f2937;
+}
+
+.modal-actions button:first-child:hover {
+  background: #d1d5db;
+}
+
+.modal-actions button:last-child {
+  background: linear-gradient(to right, #3b82f6, #2563eb);
+  color: #fff;
+}
+
+.modal-actions button:last-child:hover {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+}
+
+.delete-modal .modal-actions button:last-child {
+  background: linear-gradient(to right, #f87171, #ef4444);
+}
+
+.delete-modal .modal-actions button:last-child:hover {
+  background: linear-gradient(to right, #ef4444, #dc2626);
+}
+
+/* Animations */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .filters-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .fee-tab {
+    padding: 16px;
+  }
+
+  .fee-table th,
+  .fee-table td {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .audit-table th,
+  .audit-table td {
+    padding: 12px;
+    font-size: 12px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .pagination-section button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .modal-content {
+    padding: 16px;
+    margin: 16px;
+  }
+}

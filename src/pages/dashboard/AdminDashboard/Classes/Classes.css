@@ -1,0 +1,273 @@
+.classes-container {
+  width: 100%;
+  position: relative;
+}
+
+.countdown-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #ff6b6b, #ff8e53);
+  color: white;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1100;
+  font-weight: bold;
+}
+
+.cancel-countdown-button {
+  padding: 0.3rem 0.8rem;
+  border: none;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #ff6b6b;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-countdown-button:hover {
+  background: #f0f0f0;
+}
+
+.filter-container {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.filter-input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  min-width: 200px;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #1976d2;
+  box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #c8ced3;
+  color: rgb(67, 121, 172);
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #6215c0;
+}
+
+.add-button svg {
+  font-size: 24px;
+}
+
+.classes-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.classes-table th,
+.classes-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.classes-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+}
+
+.classes-table tr:hover {
+  background: #f9f9f9;
+}
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.action-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.action-button svg {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.action-button.edit:hover {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.action-button.delete:hover {
+  background: #ffebee;
+  color: #d32f2f;
+}
+
+.dialog {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog.open {
+  display: flex;
+}
+
+.dialog-content {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-container input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.cancel-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.cancel-button:hover {
+  background: #f5f5f5;
+}
+
+.save-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #1976d2;
+  color: white;
+  cursor: pointer;
+}
+
+.save-button:hover {
+  background: #1565c0;
+}
+
+.delete-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.delete-modal.open {
+  display: flex;
+}
+
+.delete-modal-content {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.delete-modal-content h2 {
+  color: #d32f2f;
+  margin-bottom: 1rem;
+}
+
+.delete-modal-content p {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.delete-modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.cancel-delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cancel-delete-button:hover {
+  background: #43a047;
+}
+
+.confirm-delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: #d32f2f;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.confirm-delete-button:hover {
+  background: #b71c1c;
+}
