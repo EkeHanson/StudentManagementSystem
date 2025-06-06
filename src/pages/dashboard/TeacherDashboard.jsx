@@ -116,7 +116,6 @@ const TeacherDashboard = () => {
               { id: 'STU-1008', name: 'Jennifer Taylor', assignments: 78, classwork: 82, exam1: 85, exam2: 80, exam3: 83 },
               { id: 'STU-1008', name: 'Ikor Taylor', assignments: 78, classwork: 82, exam1: 45, exam2: 80, exam3: 83 },
               { id: 'STU-1009', name: 'Emily Anderson', assignments: 45, classwork: 90, exam1: 90, exam2: 92, exam3: 87 },
-             
               { id: 'STU-1009', name: 'Thomas Anderson', assignments: 85, classwork: 90, exam1: 88, exam2: 92, exam3: 87 },
               { id: 'STU-1010', name: 'Lisa Martinez', assignments: 30, classwork: 82, exam1: 85, exam2: 80, exam3: 83 }
             ]

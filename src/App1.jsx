@@ -3,11 +3,8 @@ import { AuthProvider } from './contexts/AuthContext';
 import { LibraryProvider } from './contexts/LibraryContext';
 import { SnackbarProvider } from 'notistack';
 import StudentManagement from './pages/students/StudentManagement';
-import Classes from './pages/dashboard/AdminDashboard/Classes/Classes';
-import EventsTab from './pages/dashboard/AdminDashboard/EventsTab';
-import FeeTab from './pages/dashboard/AdminDashboard/FeeTab/FeeTab';
 import ProtectedRoute from './components/shared/ProtectedRoute';
-import DashboardLayout from './components/dashboard/DashboardLayout';
+import DashboardLayout from './components/dashboard/DashboardLayout'; // Import DashboardLayout
 import Login from './pages/auth/Login';
 import Home from './pages/Home';
 import Features from './pages/Features';
@@ -56,19 +53,27 @@ function App() {
 
               {/* Dashboard Routes with DashboardLayout */}
               <Route element={<DashboardLayout />}>
-                <Route path="/dashboard" element={<AdminDashboard />} />
-                <Route path="/dashboard/admin" element={<AdminDashboard />} />
-                <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
-                <Route path="/dashboard/student" element={<StudentDashboard />} />
-                <Route path="/dashboard/parent" element={<ParentDashboard />} />
-                <Route path="/dashboard/students" element={<StudentManagement />} />
-                <Route path="/dashboard/classes" element={<Classes />} />
-                <Route path="/dashboard/events" element={<EventsTab />} />
-                <Route path="/dashboard/fees" element={<FeeTab />} />
-                <Route path="/dashboard/attendance" element={<div>Attendance Placeholder</div>} />
-                <Route path="/dashboard/schedule" element={<div>Schedule Placeholder</div>} />
-                <Route path="/dashboard/reports" element={<div>Reports Placeholder</div>} />
-                <Route path="/dashboard/settings" element={<div>Settings Placeholder</div>} />
+                {/* Admin Routes */}
+                <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                  <Route path="/dashboard/admin" element={<AdminDashboard />} />
+                </Route>
+
+                {/* Teacher Routes */}
+                <Route element={<ProtectedRoute allowedRoles={['teacher']} />}>
+                  <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                  <Route path="/students" element={<StudentManagement />} />
+                </Route>
+
+                {/* Student Routes */}
+                <Route element={<ProtectedRoute allowedRoles={['student']} />}>
+                  <Route path="/dashboard/student" element={<StudentDashboard />} />
+                </Route>
+
+                {/* Parent Routes */}
+                <Route element={<ProtectedRoute allowedRoles={['parent']} />}>
+                  <Route path="/dashboard/parent" element={<ParentDashboard />} />
+                </Route>
+                
 
                 {/* Library Routes */}
                 <Route path="/library" element={<LibraryDashboard />}>
@@ -80,7 +85,7 @@ function App() {
                 </Route>
               </Route>
 
-              {/* Redirect unknown routes to home */}
+              {/* Redirect root to home */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </LibraryProvider>

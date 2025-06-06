@@ -35,7 +35,7 @@ const LibraryDashboard = () => {
   };
 
   const tabs = [
-    // { value: 'dashboard', label: 'Overview' },
+    { value: 'dashboard', label: 'Overview' },
     { value: 'physical-books', label: 'Physical Books' },
     { value: 'circulation', label: 'Circulation' },
     { value: 'digital-resources', label: 'Digital Resources' },
