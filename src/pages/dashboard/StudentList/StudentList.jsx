@@ -1,10 +1,108 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import {
+  Tabs, Tab, Table, TableBody, TableCell, TableHead, TableRow,
+  Button, Box, Typography, Avatar, Card, LinearProgress, Chip,
+  TextField, Dialog, DialogTitle, DialogContent, DialogActions,
+  Divider, useTheme, ButtonGroup, Tooltip, Alert
+} from '@mui/material';
+import {
+  Edit as EditIcon, Delete as DeleteIcon, Add as AddIcon,
+  Visibility as ViewIcon, Badge as BadgeIcon, Print as PrintIcon,
+  Save as SaveIcon, Close as CloseIcon
+} from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
+import html2canvas from 'html2canvas';
 import './StudentList.css';
 
+// Styled components for IDCardGenerator
+const IDCardContainer = styled(Card)(({ theme }) => ({
+  width: '340px',
+  height: '220px',
+  borderRadius: '12px',
+  position: 'relative',
+  overflow: 'hidden',
+  boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
+  margin: '0 auto',
+  '&.back': {
+    backgroundColor: theme.palette.grey[100],
+    border: `1px solid ${theme.palette.grey[300]}`
+  }
+}));
+
+const IDCardFront = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  background: 'linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%)',
+  position: 'relative',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: '80px',
+    height: '80px',
+    background: theme.palette.primary.main,
+    opacity: 0.1,
+    borderRadius: '0 0 0 100%'
+  }
+}));
+
+const IDCardBack = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between'
+}));
+
+const SchoolHeader = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  marginBottom: theme.spacing(1),
+  '& img': {
+    marginRight: theme.spacing(1.5),
+    width: '40px',
+    height: '40px',
+    objectFit: 'contain'
+  }
+}));
+
+// School information constant
+const schoolInfo = {
+  name: "Excel International Excellent Schools",
+  logo: "https://via.placeholder.com/100?text=EIES",
+  address: "123 Education Blvd, Learning City",
+  phone: "+1 (234) 567-8900",
+  website: "www.excelinternational.edu",
+  motto: "Empowering Minds, Shaping Futures"
+};
+
+// Default card text constant
+const defaultCardText = {
+  front: "Official Student Identification",
+  back: "This card is property of Excel International Excellent Schools. If found, please return to the school office.",
+  validity: "Valid until graduation"
+};
+
+// TabPanel component
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`student-tabpanel-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
+}
+
 const StudentList = ({ data, onEdit, onDelete, onAdd }) => {
+  const theme = useTheme();
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({
     name: '',
@@ -18,6 +116,12 @@ const StudentList = ({ data, onEdit, onDelete, onAdd }) => {
   const [isDeleteConfirmed, setIsDeleteConfirmed] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [formData, setFormData] = useState({});
+  const [tabValue, setTabValue] = useState(0);
+  const [selectedForID, setSelectedForID] = useState(null);
+  const [cardText, setCardText] = useState(defaultCardText);
+  const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [tempCardText, setTempCardText] = useState(defaultCardText);
+  const cardRef = useRef(null);
   const studentsPerPage = 7;
 
   // Extract unique classes and genders for dropdowns
@@ -141,6 +245,45 @@ const StudentList = ({ data, onEdit, onDelete, onAdd }) => {
     handleAddModalClose();
   };
 
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+    setCurrentPage(1);
+  };
+
+  const handleGenerateID = (student) => {
+    setSelectedForID(student);
+    setTabValue(2);
+  };
+
+  // IDCardGenerator handlers
+  const handlePrint = () => {
+    if (cardRef.current && selectedForID) {
+      html2canvas(cardRef.current).then(canvas => {
+        const link = document.createElement('a');
+        link.download = `id-card-${selectedForID.id}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      });
+    }
+  };
+
+  const handleEditText = () => {
+    setTempCardText(cardText);
+    setEditDialogOpen(true);
+  };
+
+  const handleSaveText = () => {
+    setCardText(tempCardText);
+    setEditDialogOpen(false);
+  };
+
+  const handleTextChange = (field) => (e) => {
+    setTempCardText(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }));
+  };
+
   return (
     <div className="student-list-container">
       {isDeleteConfirmed && (
@@ -208,57 +351,386 @@ const StudentList = ({ data, onEdit, onDelete, onAdd }) => {
         </button>
       </div>
 
-      <table className="student-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Class</th>
-            <th>Gender</th>
-            <th>Attendance</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentStudents.length > 0 ? (
-            currentStudents.map((student) => (
-              <tr key={student.id}>
-                <td>{student.id}</td>
-                <td>{student.name}</td>
-                <td>{student.class}</td>
-                <td>{student.gender}</td>
-                <td>{student.attendance}</td>
-                <td>
-                  <span className={`status-chip ${student.status.toLowerCase()}`}>
-                    {student.status}
-                  </span>
-                </td>
-                <td>
-                  <button 
-                    className="action-button edit"
-                    onClick={() => onEdit(student, 'students')}
-                    aria-label={`Edit student ${student.name}`}
-                  >
-                    <EditIcon />
-                  </button>
-                  <button 
-                    className="action-button delete"
-                    onClick={() => handleDeleteClick(student.id)}
-                    aria-label={`Delete student ${student.id}`}
-                  >
-                    <DeleteIcon />
-                  </button>
-                </td>
-              </tr>
-            ))
+      <Tabs
+        value={tabValue}
+        onChange={handleTabChange}
+        variant="scrollable"
+        scrollButtons="auto"
+        sx={{ 
+          borderBottom: 1, 
+          borderColor: 'divider',
+          '& .MuiTab-root': {
+            textTransform: 'none',
+            fontWeight: 500,
+            minHeight: 48
+          }
+        }}
+      >
+        <Tab label="Student Profiles" icon={<AddIcon />} iconPosition="start" />
+        <Tab label="Attendance Tracking" icon={<AddIcon />} iconPosition="start" />
+        <Tab label="ID Card Generator" icon={<BadgeIcon />} iconPosition="start" />
+        <Tab label="Progress Reports" icon={<AddIcon />} iconPosition="start" />
+      </Tabs>
+
+      <TabPanel value={tabValue} index={0}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>ID</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Photo</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Name</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Class</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Gender</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Attendance</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Status</TableCell>
+              <TableCell sx={{ fontWeight: 600, color: theme.palette.text.primary }}>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentStudents.length > 0 ? (
+              currentStudents.map((student) => (
+                <TableRow
+                  key={student.id}
+                  hover
+                  sx={{
+                    backgroundColor: selectedForID?.id === student.id
+                      ? theme.palette.action.selected
+                      : 'inherit',
+                    '&:hover': {
+                      backgroundColor: selectedForID?.id === student.id
+                        ? theme.palette.action.selected
+                        : theme.palette.action.hover
+                    },
+                    transition: 'background-color 0.2s ease',
+                    cursor: 'pointer'
+                  }}
+                >
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>{student.id}</TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
+                    <Avatar
+                      src={student.photo}
+                      alt={student.name}
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        border: selectedForID?.id === student.id
+                          ? `2px solid ${theme.palette.primary.main}`
+                          : 'none'
+                      }}
+                    />
+                  </TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>{student.name}</TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>{student.class}</TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>{student.gender}</TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>{student.attendance}</TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
+                    <span className={`status-chip ${student.status.toLowerCase()}`}>
+                      {student.status}
+                    </span>
+                  </TableCell>
+                  <TableCell sx={{ borderBottom: `1px solid ${theme.palette.divider}` }}>
+                    <ButtonGroup
+                      variant="outlined"
+                      size="small"
+                      sx={{
+                        borderColor: selectedForID?.id === student.id
+                          ? theme.palette.primary.main
+                          : theme.palette.grey[400]
+                      }}
+                    >
+                      <Tooltip title="Edit Student" arrow>
+                        <Button
+                          onClick={() => onEdit(student, 'students')}
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: theme.palette.grey[100]
+                            }
+                          }}
+                        >
+                          <EditIcon
+                            fontSize="small"
+                            color={selectedForID?.id === student.id ? "primary" : "inherit"}
+                          />
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Delete Student" arrow>
+                        <Button
+                          onClick={() => handleDeleteClick(student.id)}
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: theme.palette.grey[100]
+                            }
+                          }}
+                        >
+                          <DeleteIcon
+                            fontSize="small"
+                            color={selectedForID?.id === student.id ? "primary" : "inherit"}
+                          />
+                        </Button>
+                      </Tooltip>
+                      <Tooltip title="Generate ID Card" arrow>
+                        <Button
+                          onClick={() => handleGenerateID(student)}
+                          color={selectedForID?.id === student.id ? "primary" : "inherit"}
+                          sx={{
+                            '&:hover': {
+                              backgroundColor: theme.palette.grey[100]
+                            }
+                          }}
+                        >
+                          <BadgeIcon
+                            fontSize="small"
+                            color={selectedForID?.id === student.id ? "primary" : "inherit"}
+                          />
+                        </Button>
+                      </Tooltip>
+                    </ButtonGroup>
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={8} className="no-results">No students match the selected filters.</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={1}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Attendance %</TableCell>
+              <TableCell>Progress</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentStudents.map((student) => (
+              <TableRow key={student.id} hover>
+                <TableCell>{student.id}</TableCell>
+                <TableCell>{student.name}</TableCell>
+                <TableCell>{student.attendance}%</TableCell>
+                <TableCell>
+                  <LinearProgress
+                    variant="determinate"
+                    value={parseFloat(student.attendance)}
+                    sx={{ height: 8, borderRadius: 4 }}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={2}>
+        <Box sx={{ p: 3 }}>
+          <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Typography variant="h6" component="h2">
+              {selectedForID ? `ID Card for ${selectedForID.name}` : 'Student ID Card Generator'}
+            </Typography>
+            {selectedForID && (
+              <Box>
+                <Button
+                  variant="outlined"
+                  startIcon={<EditIcon />}
+                  onClick={handleEditText}
+                  sx={{ mr: 2 }}
+                >
+                  Customize Text
+                </Button>
+                <Button
+                  variant="contained"
+                  startIcon={<PrintIcon />}
+                  onClick={handlePrint}
+                >
+                  Print Card
+                </Button>
+              </Box>
+            )}
+          </Box>
+          {selectedForID ? (
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Box sx={{ mb: 4 }}>
+                <IDCardContainer ref={cardRef}>
+                  <IDCardFront>
+                    <SchoolHeader>
+                      <img src={schoolInfo.logo} alt="School Logo" />
+                      <Box>
+                        <Typography variant="subtitle2" fontWeight={600}>
+                          {schoolInfo.name}
+                        </Typography>
+                        <Typography variant="caption" color="textSecondary">
+                          {cardText.front}
+                        </Typography>
+                      </Box>
+                    </SchoolHeader>
+                    <Box sx={{ display: 'flex', flexGrow: 1, mt: 1 }}>
+                      <Box sx={{ mr: 2 }}>
+                        <Avatar
+                          src={selectedForID.photo}
+                          alt={selectedForID.name}
+                          sx={{
+                            width: 80,
+                            height: 80,
+                            border: `2px solid ${theme.palette.primary.main}`
+                          }}
+                        />
+                      </Box>
+                      <Box sx={{ flexGrow: 1 }}>
+                        <Typography variant="body1" fontWeight={600}>
+                          {selectedForID.name}
+                        </Typography>
+                        <Typography variant="body2">
+                          ID: {selectedForID.id}
+                        </Typography>
+                        <Typography variant="body2">
+                          Class: {selectedForID.class}
+                        </Typography>
+                        <Typography variant="body2">
+                          DOB: {selectedForID.dob ? new Date(selectedForID.dob).toLocaleDateString() : 'N/A'}
+                        </Typography>
+                        <Typography variant="body2" sx={{ mt: 1 }}>
+                          <em>{cardText.validity}</em>
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box sx={{
+                      position: 'absolute',
+                      bottom: 8,
+                      right: 8,
+                      fontSize: '0.7rem',
+                      color: theme.palette.text.secondary
+                    }}>
+                      {schoolInfo.motto}
+                    </Box>
+                  </IDCardFront>
+                </IDCardContainer>
+              </Box>
+              <Box sx={{ textAlign: 'center', mb: 4 }}>
+                <Typography variant="subtitle2" gutterBottom>
+                  Back of ID Card
+                </Typography>
+                <IDCardContainer className="back">
+                  <IDCardBack>
+                    <Box>
+                      <Typography variant="subtitle2" fontWeight={600} gutterBottom>
+                        {schoolInfo.name}
+                      </Typography>
+                      <Typography variant="body2" paragraph>
+                        {cardText.back}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Divider sx={{ my: 1 }} />
+                      <Typography variant="caption" component="div">
+                        {schoolInfo.address}
+                      </Typography>
+                      <Typography variant="caption" component="div">
+                        {schoolInfo.phone} • {schoolInfo.website}
+                      </Typography>
+                    </Box>
+                  </IDCardBack>
+                </IDCardContainer>
+              </Box>
+            </Box>
           ) : (
-            <tr>
-              <td colSpan="7" className="no-results">No students match the selected filters.</td>
-            </tr>
+            <Alert severity="info" sx={{ mb: 2 }}>
+              Please select a student from the "Student Profiles" tab to generate their ID card
+            </Alert>
           )}
-        </tbody>
-      </table>
+          <Dialog open={editDialogOpen} onClose={() => setEditDialogOpen(false)} fullWidth maxWidth="sm">
+            <DialogTitle>Customize ID Card Text</DialogTitle>
+            <DialogContent>
+              <Box sx={{ pt: 2 }}>
+                <TextField
+                  fullWidth
+                  label="Front Text"
+                  value={tempCardText.front}
+                  onChange={handleTextChange('front')}
+                  margin="normal"
+                  variant="outlined"
+                />
+                <TextField
+                  fullWidth
+                  label="Back Text"
+                  value={tempCardText.back}
+                  onChange={handleTextChange('back')}
+                  margin="normal"
+                  multiline
+                  rows={4}
+                  variant="outlined"
+                />
+                <TextField
+                  fullWidth
+                  label="Validity Text"
+                  value={tempCardText.validity}
+                  onChange={handleTextChange('validity')}
+                  margin="normal"
+                  variant="outlined"
+                />
+              </Box>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setEditDialogOpen(false)}
+                startIcon={<CloseIcon />}
+                color="secondary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={handleSaveText}
+                variant="contained"
+                color="primary"
+                startIcon={<SaveIcon />}
+              >
+                Save Changes
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Box>
+      </TabPanel>
+
+      <TabPanel value={tabValue} index={3}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Math</TableCell>
+              <TableCell>Science</TableCell>
+              <TableCell>English</TableCell>
+              <TableCell>Disciplinary</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {currentStudents.map((student) => (
+              <TableRow key={student.id} hover>
+                <TableCell>{student.id}</TableCell>
+                <TableCell>{student.name}</TableCell>
+                <TableCell>{student.grades?.math || 'N/A'}</TableCell>
+                <TableCell>{student.grades?.science || 'N/A'}</TableCell>
+                <TableCell>{student.grades?.english || 'N/A'}</TableCell>
+                <TableCell>
+                  {student.disciplinaryRecords?.length > 0 ? (
+                    <Chip
+                      label={student.disciplinaryRecords.length}
+                      color="warning"
+                      size="small"
+                    />
+                  ) : (
+                    <Chip label="None" color="success" size="small" />
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TabPanel>
 
       <div className="pagination">
         <button
