@@ -109,7 +109,7 @@ const DashboardLayout = () => {
     // { name: 'Students', href: '/dashboard/students', icon: <PeopleIcon /> },
     // { name: 'Classes', href: '/dashboard/classes', icon: <SchoolIcon /> },
     // { name: 'Attendance', href: '/dashboard/attendance', icon: <MenuBookIcon /> },
-    { name: 'Schedule', href: '/dashboard/schedule', icon: <CalendarIcon /> },
+    // { name: 'Schedule', href: '/dashboard/schedule', icon: <CalendarIcon /> },
     // { name: 'Events', href: '/dashboard/events', icon: <EventIcon /> },
     { name: 'Fees', href: '/dashboard/fees', icon: <MoneyIcon /> },
     { name: 'Reports', href: '/dashboard/reports', icon: <ReportsIcon /> },
