@@ -8,12 +8,11 @@ import TimetableManagement from '../TimetableManagement';
 import EventsTab from './EventsTab';
 import ParentTab from './ParentTab/ParentTab';
 import FeeTab from './FeeTab/FeeTab';
-import { Tabs, Tab, Button, Box, Typography } from '@mui/material';
+import { Tabs, Tab, Button, Box, Typography, TextField } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import TextField from '@mui/material/TextField';
 
 const AdminDashboard = () => {
   const { currentUser } = useAuth();
@@ -26,12 +25,78 @@ const AdminDashboard = () => {
       { id: 2, name: 'Jane Teacher', role: 'teacher', email: 'jane@teacher.com' },
     ],
     students: [
-      { id: 'STU-1001', name: 'John Doe', class: 'Grade 5', attendance: '92%', gender: 'Male', status: 'Active' },
-      { id: 'STU-1002', name: 'Emma Smith', class: 'Grade 7', attendance: '88%', gender: 'Female', status: 'Active' },
-      { id: 'STU-1003', name: 'Liam Johnson', class: 'Grade 6', attendance: '95%', gender: 'Male', status: 'Inactive' },
-      { id: 'STU-1004', name: 'Olivia Brown', class: 'Grade 4', attendance: '90%', gender: 'Female', status: 'Active' },
-      { id: 'STU-1005', name: 'Noah Williams', class: 'Grade 8', attendance: '85%', gender: 'Male', status: 'Active' },
-      { id: 'STU-1006', name: 'Ava Jones', class: 'Grade 3', attendance: '97%', gender: 'Female', status: 'Active' },
+      {
+        id: 'STU-1001',
+        name: 'John Doe',
+        class: 'Grade 5',
+        attendance: '92%',
+        gender: 'Male',
+        status: 'Active',
+        photo: 'https://via.assets.so/album.png?id=1&q=95&w=360&h=360&fit=fill',
+        dob: '2008-05-15',
+        grades: { math: 85, science: 90, english: 88 },
+        disciplinaryRecords: [],
+      },
+      {
+        id: 'STU-1002',
+        name: 'Emma Smith',
+        class: 'Grade 7',
+        attendance: '88%',
+        gender: 'Female',
+        status: 'Active',
+        photo: 'https://via.assets.so/album.png?id=2&q=95&w=360&h=360&fit=fill',
+        dob: '2008-06-20',
+        grades: { math: 78, science: 82, english: 95 },
+        disciplinaryRecords: ['Late submission - 2025-03-01'],
+      },
+      {
+        id: 'STU-1003',
+        name: 'Liam Johnson',
+        class: 'Grade 6',
+        attendance: '95%',
+        gender: 'Male',
+        status: 'Inactive',
+        photo: 'https://via.assets.so/album.png?id=3&q=95&w=360&h=360&fit=fill',
+        dob: '2007-09-10',
+        grades: { math: 92, science: 87, english: 85 },
+        disciplinaryRecords: [],
+      },
+      {
+        id: 'STU-1004',
+        name: 'Olivia Brown',
+        class: 'Grade 4',
+        attendance: '90%',
+        gender: 'Female',
+        status: 'Active',
+        photo: 'https://via.assets.so/album.png?id=4&q=95&w=360&h=360&fit=fill',
+        dob: '2007-11-25',
+        grades: { math: 80, science: 85, english: 93 },
+        disciplinaryRecords: [],
+      },
+      {
+        id: 'STU-1005',
+        name: 'Noah Williams',
+        class: 'Grade 8',
+        attendance: '85%',
+        gender: 'Male',
+        status: 'Active',
+        photo: 'https://via.assets.so/album.png?id=5&q=95&w=360&h=360&fit=fill',
+        dob: '2006-03-12',
+        grades: { math: 88, science: 91, english: 87 },
+        disciplinaryRecords: ['Absent without notice - 2025-02-15'],
+      },
+      {
+        id: 'STU-1006',
+        name: 'Ava Jones',
+        class: 'Grade 3',
+        attendance: '97%',
+        gender: 'Female',
+        status: 'Active',
+        photo: 'https://via.assets.so/album.png?id=6&q=95&w=360&h=360&fit=fill',
+        dob: '2008-07-30',
+        grades: { math: 90, science: 88, english: 92 },
+        disciplinaryRecords: [],
+      },
     ],
     classes: [
       { id: 'CLS-001', name: 'Grade 3' },
@@ -43,8 +108,18 @@ const AdminDashboard = () => {
       { id: 'CLS-007', name: 'Grade 9' },
     ],
     teachers: [
-      { id: 'TCH-001', name: 'Jane Smith', email: 'jane@school.com', subjects: [{ subjectId: 'SUB-001', classes: ['Grade 5'] }, { subjectId: 'SUB-002', classes: ['Grade 4'] }] },
-      { id: 'TCH-002', name: 'John Doe', email: 'doe@school.com', subjects: [{ subjectId: 'SUB-001', classes: ['Grade 6'] }, { subjectId: 'SUB-003', classes: ['Grade 3'] }] },
+      {
+        id: 'TCH-001',
+        name: 'Jane Smith',
+        email: 'jane@school.com',
+        subjects: [{ subjectId: 'SUB-001', classes: ['Grade 5'] }, { subjectId: 'SUB-002', classes: ['Grade 4'] }],
+      },
+      {
+        id: 'TCH-002',
+        name: 'John Doe',
+        email: 'doe@school.com',
+        subjects: [{ subjectId: 'SUB-001', classes: ['Grade 6'] }, { subjectId: 'SUB-003', classes: ['Grade 3'] }],
+      },
     ],
     subjects: [
       { id: 'SUB-001', name: 'Mathematics', classes: ['Grade 5', 'Grade 6'], teachers: [] },
@@ -54,8 +129,21 @@ const AdminDashboard = () => {
     classLevels: ['Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10', 'Grade 11', 'Grade 12'],
     parents: [{ id: 'PAR-001', name: 'Mike Parent', wards: ['STU-1001'] }],
     fees: [
-      { id: 'FEE001', studentId: 'STU-1001', term: '2024-25 Term 1', type: 'Tuition', amountDue: 25000, amountPaid: 25000, paymentDate: '2025-01-15', paymentMode: 'Online', invoiceNo: 'INV001', dueDate: '2025-01-10', scholarship: 0, refunded: 0, status: 'Paid' },
-      // ... (other fee entries remain unchanged)
+      {
+        id: 'FEE001',
+        studentId: 'STU-1001',
+        term: '2024-25 Term 1',
+        type: 'Tuition',
+        amountDue: 25000,
+        amountPaid: 25000,
+        paymentDate: '2025-01-15',
+        paymentMode: 'Online',
+        invoiceNo: 'INV001',
+        dueDate: '2025-01-10',
+        scholarship: 0,
+        refunded: 0,
+        status: 'Paid',
+      },
     ],
     events: [
       { id: 1, title: 'Science Fair', startDate: '2025-04-15', endDate: '2025-04-15', description: 'Annual science fair exhibition', type: 'event' },
@@ -95,6 +183,12 @@ const AdminDashboard = () => {
         amountPaid: parseFloat(data.amountPaid) || 0,
         scholarship: parseFloat(data.scholarship) || 0,
         refunded: parseFloat(data.refunded) || 0,
+      }),
+      ...(type === 'students' && {
+        grades: data.grades || { math: 0, science: 0, english: 0 },
+        disciplinaryRecords: data.disciplinaryRecords || [],
+        photo: data.photo || 'https://via.placeholder.com/100?text=Student',
+        dob: data.dob || '',
       }),
     };
 
@@ -190,7 +284,7 @@ const AdminDashboard = () => {
         ),
       }));
     } else {
-      const entityType = tabValue === 0 ? 'users' : tabValue === 5 ? 'parents' : 'fees';
+      const entityType = tabValue === 0 ? 'users' : tabValue === 2 ? 'students' : tabValue === 5 ? 'parents' : 'fees';
       handleAdd(data, entityType);
     }
     handleDialogClose();
@@ -228,7 +322,7 @@ const AdminDashboard = () => {
         ))}
       </Tabs>
       <Box sx={{ mt: 2 }}>
-        {[0, 5].includes(tabValue) && (
+        {[0, 2, 5].includes(tabValue) && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
@@ -245,7 +339,7 @@ const AdminDashboard = () => {
         onClose={handleDialogClose}
         onSave={handleSave}
         data={editData}
-        type={editData?.type || (tabValue === 0 ? 'users' : 'parents')}
+        type={editData?.type || (tabValue === 0 ? 'users' : tabValue === 2 ? 'students' : 'parents')}
       />
     </Box>
   );
@@ -294,14 +388,23 @@ const EditDialog = ({ open, onClose, onSave, data, type }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === 'wards' ? value.split(', ').filter((v) => v) : value,
+      [name]:
+        name === 'wards'
+          ? value.split(', ').filter((v) => v)
+          : name === 'grades'
+          ? JSON.parse(value || '{}')
+          : name === 'disciplinaryRecords'
+          ? value.split(', ').filter((v) => v)
+          : value,
     }));
   };
 
   const handleSubmit = () => {
     if (
       (type === 'users' && (!formData.name || !formData.role || !formData.email)) ||
-      (type === 'parents' && (!formData.id || !formData.name || !formData.wards?.length))
+      (type === 'parents' && (!formData.id || !formData.name || !formData.wards?.length)) ||
+      (type === 'students' &&
+        (!formData.id || !formData.name || !formData.class || !formData.gender || !formData.attendance || !formData.status))
     ) {
       return;
     }
@@ -309,8 +412,19 @@ const EditDialog = ({ open, onClose, onSave, data, type }) => {
   };
 
   return (
-    <Box sx={{ display: open ? 'block' : 'none', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, bgcolor: 'rgba(0,0,0,0.5)', zIndex: 1300 }}>
-      <Box sx={{ bgcolor: 'background.paper', p: 3, m: 'auto', mt: '10%', maxWidth: 400, borderRadius: 2 }}>
+    <Box
+      sx={{
+        display: open ? 'block' : 'none',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        bgcolor: 'rgba(0,0,0,0.5)',
+        zIndex: 1300,
+      }}
+    >
+      <Box sx={{ bgcolor: 'background.paper', p: 3, m: 'auto', mt: '10%', maxWidth: 500, borderRadius: 2 }}>
         <Typography variant="h6" gutterBottom>
           {data ? `Edit ${type}` : `Add New ${type}`}
         </Typography>
@@ -373,6 +487,96 @@ const EditDialog = ({ open, onClose, onSave, data, type }) => {
               onChange={handleChange}
               margin="normal"
               required
+            />
+          </>
+        )}
+        {type === 'students' && (
+          <>
+            <TextField
+              fullWidth
+              label="ID"
+              name="id"
+              value={formData.id || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Name"
+              name="name"
+              value={formData.name || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Class"
+              name="class"
+              value={formData.class || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Gender"
+              name="gender"
+              value={formData.gender || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Attendance (%)"
+              name="attendance"
+              value={formData.attendance || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Status"
+              name="status"
+              value={formData.status || ''}
+              onChange={handleChange}
+              margin="normal"
+              required
+            />
+            <TextField
+              fullWidth
+              label="Photo URL"
+              name="photo"
+              value={formData.photo || ''}
+              onChange={handleChange}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Date of Birth (YYYY-MM-DD)"
+              name="dob"
+              value={formData.dob || ''}
+              onChange={handleChange}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Grades (JSON: {math: number, science: number, english: number})"
+              name="grades"
+              value={formData.grades ? JSON.stringify(formData.grades) : ''}
+              onChange={handleChange}
+              margin="normal"
+            />
+            <TextField
+              fullWidth
+              label="Disciplinary Records (comma-separated)"
+              name="disciplinaryRecords"
+              value={formData.disciplinaryRecords?.join(', ') || ''}
+              onChange={handleChange}
+              margin="normal"
             />
           </>
         )}
